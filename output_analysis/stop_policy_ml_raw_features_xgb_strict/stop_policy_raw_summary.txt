@@ -1,0 +1,19 @@
+Stop-policy ML (XGB raw features, STRICT stop band) summary (2025-11-18T15:32:40.530415 UTC)
+
+Random state: 42
+Train sessions: 69
+Val sessions  : 17
+Test sessions : 21
+
+Label (strict stop band) positive rate by split:
+  train: 0.6530
+  val  : 0.4821
+  test : 0.6946
+
+Decision threshold (val F1 max): 0.5800
+Test F1 at threshold           : 0.9658
+
+Labeling hyperparameters:
+  EPSILON_REGRET: 20.0
+  MIN_PROFIT    : 0.0
+  MIN_GAMES     : 2

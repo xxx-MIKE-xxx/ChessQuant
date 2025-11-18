@@ -1,0 +1,106 @@
+{
+  "id": "julio_amigo_dos",
+  "username": "julio_amigo_dos",
+  "perfs": {
+    "bullet": {
+      "games": 724,
+      "rating": 1907,
+      "rd": 45,
+      "prog": 25
+    },
+    "blitz": {
+      "games": 6,
+      "rating": 1380,
+      "rd": 147,
+      "prog": 0,
+      "prov": true
+    },
+    "rapid": {
+      "games": 0,
+      "rating": 1500,
+      "rd": 500,
+      "prog": 0,
+      "prov": true
+    },
+    "classical": {
+      "games": 0,
+      "rating": 1500,
+      "rd": 500,
+      "prog": 0,
+      "prov": true
+    },
+    "correspondence": {
+      "games": 0,
+      "rating": 1500,
+      "rd": 500,
+      "prog": 0,
+      "prov": true
+    },
+    "chess960": {
+      "games": 1,
+      "rating": 1237,
+      "rd": 293,
+      "prog": 0,
+      "prov": true
+    },
+    "threeCheck": {
+      "games": 2,
+      "rating": 1395,
+      "rd": 359,
+      "prog": 0,
+      "prov": true
+    },
+    "antichess": {
+      "games": 2,
+      "rating": 1220,
+      "rd": 259,
+      "prog": 0,
+      "prov": true
+    },
+    "atomic": {
+      "games": 10,
+      "rating": 1192,
+      "rd": 115,
+      "prog": 0,
+      "prov": true
+    },
+    "horde": {
+      "games": 6,
+      "rating": 1601,
+      "rd": 167,
+      "prog": 0,
+      "prov": true
+    },
+    "racingKings": {
+      "games": 1,
+      "rating": 1434,
+      "rd": 404,
+      "prog": 0,
+      "prov": true
+    },
+    "crazyhouse": {
+      "games": 31,
+      "rating": 1633,
+      "rd": 79,
+      "prog": -49
+    }
+  },
+  "createdAt": 1751909177936,
+  "seenAt": 1763312793778,
+  "playTime": {
+    "total": 90542,
+    "tv": 0
+  },
+  "url": "https://lichess.org/@/julio_amigo_dos",
+  "count": {
+    "all": 792,
+    "rated": 783,
+    "draw": 30,
+    "loss": 395,
+    "win": 367,
+    "bookmark": 0,
+    "playing": 0,
+    "import": 0,
+    "me": 0
+  }
+}

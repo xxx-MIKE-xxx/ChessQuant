@@ -1,0 +1,11 @@
+Stop-policy ML (raw features) summary (2025-11-17T17:35:28.757543 UTC)
+
+Random state: 42
+Train sessions: 69
+Val sessions  : 17
+Test sessions : 21
+
+Label (best stop) positive rate by split:
+  train: 0.1754
+  val  : 0.1875
+  test : 0.1497

@@ -1,0 +1,10 @@
+After we find the highest potential ranting - we also find out the best tilt
+threshold - we can use it for the users personalized tilt optimal signal -
+eg. turn this scale tilt - 0-1 to play / stop taking stop as the most optimal 
+tilt threshold. Another thing is number of warmup games that maximise ranking
+we find a personalized number of games that gives highest ranking and we use
+this info to personalize warmup. We can just eliminate as many games as we want
+because we only eliminate from 'fields' or sections of a chess session that 
+we know we can improve - which right now are lowering the true rating. Goal:
+to find a suitable algorithm for finding a warmup period specific to each 
+session

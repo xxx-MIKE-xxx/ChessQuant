@@ -1,0 +1,14 @@
+Stop-policy ML (XGB raw features, MULTI-PEAK) summary (2025-11-18T15:00:51.705819 UTC)
+
+Random state: 42
+Train sessions: 69
+Val sessions  : 17
+Test sessions : 21
+
+Label (multi-peak stop) positive rate by split:
+  train: 0.2437
+  val  : 0.2054
+  test : 0.2635
+
+Decision threshold (val F1 max): 0.0600
+Test F1 at threshold           : 0.8113

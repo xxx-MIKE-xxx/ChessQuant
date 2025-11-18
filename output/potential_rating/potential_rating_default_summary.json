@@ -1,0 +1,770 @@
+{
+  "username": "julio_amigo_dos",
+  "generated_at": "2025-11-18T06:44:18.963842Z",
+  "tilt_threshold": 0.85,
+  "warmup_config": {
+    "bullet": 3,
+    "blitz": 2,
+    "rapid": 1,
+    "classic": 0
+  },
+  "n_sessions_with_games": 36,
+  "n_games_used": 320,
+  "final_potential_rating": 1935.683328465599,
+  "final_rating_rd": 74.36057299301233,
+  "final_game_info": {
+    "session_id": "105",
+    "game_in_session": 35
+  },
+  "sessions": [
+    {
+      "session_id": "0",
+      "time_control_category": "bullet",
+      "n_games_total": 12,
+      "n_games_used": 5,
+      "rating_after_last_game": 1936.6262272879133
+    },
+    {
+      "session_id": "1",
+      "time_control_category": "bullet",
+      "n_games_total": 31,
+      "n_games_used": 26,
+      "rating_after_last_game": 1996.3228804636753
+    },
+    {
+      "session_id": "2",
+      "time_control_category": "other",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "3",
+      "time_control_category": "bullet",
+      "n_games_total": 10,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "4",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "5",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "6",
+      "time_control_category": "bullet",
+      "n_games_total": 12,
+      "n_games_used": 6,
+      "rating_after_last_game": 2056.8810072615615
+    },
+    {
+      "session_id": "7",
+      "time_control_category": "bullet",
+      "n_games_total": 11,
+      "n_games_used": 6,
+      "rating_after_last_game": 2057.9138147804465
+    },
+    {
+      "session_id": "8",
+      "time_control_category": "bullet",
+      "n_games_total": 8,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "9",
+      "time_control_category": "bullet",
+      "n_games_total": 8,
+      "n_games_used": 5,
+      "rating_after_last_game": 2025.1037392716585
+    },
+    {
+      "session_id": "10",
+      "time_control_category": "bullet",
+      "n_games_total": 10,
+      "n_games_used": 7,
+      "rating_after_last_game": 1912.4295479617488
+    },
+    {
+      "session_id": "11",
+      "time_control_category": "bullet",
+      "n_games_total": 15,
+      "n_games_used": 9,
+      "rating_after_last_game": 1964.3213981354581
+    },
+    {
+      "session_id": "12",
+      "time_control_category": "bullet",
+      "n_games_total": 12,
+      "n_games_used": 9,
+      "rating_after_last_game": 1918.1022040483183
+    },
+    {
+      "session_id": "13",
+      "time_control_category": "bullet",
+      "n_games_total": 14,
+      "n_games_used": 5,
+      "rating_after_last_game": 1922.8508754274906
+    },
+    {
+      "session_id": "14",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "15",
+      "time_control_category": "bullet",
+      "n_games_total": 15,
+      "n_games_used": 7,
+      "rating_after_last_game": 1980.0564153193116
+    },
+    {
+      "session_id": "16",
+      "time_control_category": "bullet",
+      "n_games_total": 21,
+      "n_games_used": 6,
+      "rating_after_last_game": 1992.6640926301711
+    },
+    {
+      "session_id": "17",
+      "time_control_category": "other",
+      "n_games_total": 4,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "18",
+      "time_control_category": "bullet",
+      "n_games_total": 5,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "19",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "20",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "21",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "22",
+      "time_control_category": "other",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "23",
+      "time_control_category": "bullet",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "24",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "25",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "26",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "27",
+      "time_control_category": "bullet",
+      "n_games_total": 5,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "28",
+      "time_control_category": "bullet",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "29",
+      "time_control_category": "bullet",
+      "n_games_total": 5,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "30",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "31",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "32",
+      "time_control_category": "other",
+      "n_games_total": 10,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "33",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "34",
+      "time_control_category": "bullet",
+      "n_games_total": 34,
+      "n_games_used": 25,
+      "rating_after_last_game": 2018.9207150548577
+    },
+    {
+      "session_id": "35",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "36",
+      "time_control_category": "bullet",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "37",
+      "time_control_category": "bullet",
+      "n_games_total": 22,
+      "n_games_used": 16,
+      "rating_after_last_game": 2038.0291323106967
+    },
+    {
+      "session_id": "38",
+      "time_control_category": "bullet",
+      "n_games_total": 5,
+      "n_games_used": 2,
+      "rating_after_last_game": 2011.8636693601509
+    },
+    {
+      "session_id": "39",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "40",
+      "time_control_category": "bullet",
+      "n_games_total": 8,
+      "n_games_used": 5,
+      "rating_after_last_game": 1989.7752910433576
+    },
+    {
+      "session_id": "41",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "42",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "43",
+      "time_control_category": "bullet",
+      "n_games_total": 4,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "44",
+      "time_control_category": "bullet",
+      "n_games_total": 12,
+      "n_games_used": 9,
+      "rating_after_last_game": 1962.5629223913788
+    },
+    {
+      "session_id": "45",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "46",
+      "time_control_category": "bullet",
+      "n_games_total": 13,
+      "n_games_used": 10,
+      "rating_after_last_game": 1938.467974015139
+    },
+    {
+      "session_id": "47",
+      "time_control_category": "bullet",
+      "n_games_total": 5,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "48",
+      "time_control_category": "bullet",
+      "n_games_total": 7,
+      "n_games_used": 2,
+      "rating_after_last_game": 1937.2626001721765
+    },
+    {
+      "session_id": "49",
+      "time_control_category": "bullet",
+      "n_games_total": 5,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "50",
+      "time_control_category": "bullet",
+      "n_games_total": 21,
+      "n_games_used": 10,
+      "rating_after_last_game": 1970.4415830570333
+    },
+    {
+      "session_id": "51",
+      "time_control_category": "bullet",
+      "n_games_total": 23,
+      "n_games_used": 15,
+      "rating_after_last_game": 2006.6608037279302
+    },
+    {
+      "session_id": "52",
+      "time_control_category": "bullet",
+      "n_games_total": 10,
+      "n_games_used": 1,
+      "rating_after_last_game": 2014.991172989656
+    },
+    {
+      "session_id": "53",
+      "time_control_category": "bullet",
+      "n_games_total": 5,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "54",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "55",
+      "time_control_category": "bullet",
+      "n_games_total": 9,
+      "n_games_used": 3,
+      "rating_after_last_game": 2001.5151854914238
+    },
+    {
+      "session_id": "56",
+      "time_control_category": "bullet",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "57",
+      "time_control_category": "other",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "58",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "59",
+      "time_control_category": "bullet",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "60",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "61",
+      "time_control_category": "bullet",
+      "n_games_total": 4,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "62",
+      "time_control_category": "bullet",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "63",
+      "time_control_category": "other",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "64",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "65",
+      "time_control_category": "bullet",
+      "n_games_total": 14,
+      "n_games_used": 11,
+      "rating_after_last_game": 1983.0814276209317
+    },
+    {
+      "session_id": "66",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "67",
+      "time_control_category": "bullet",
+      "n_games_total": 9,
+      "n_games_used": 6,
+      "rating_after_last_game": 1974.3757008089183
+    },
+    {
+      "session_id": "68",
+      "time_control_category": "bullet",
+      "n_games_total": 7,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "69",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "70",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "71",
+      "time_control_category": "bullet",
+      "n_games_total": 8,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "72",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "73",
+      "time_control_category": "other",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "74",
+      "time_control_category": "bullet",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "75",
+      "time_control_category": "bullet",
+      "n_games_total": 5,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "76",
+      "time_control_category": "bullet",
+      "n_games_total": 9,
+      "n_games_used": 6,
+      "rating_after_last_game": 1949.7064746605204
+    },
+    {
+      "session_id": "77",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "78",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "79",
+      "time_control_category": "bullet",
+      "n_games_total": 18,
+      "n_games_used": 15,
+      "rating_after_last_game": 1973.522175568397
+    },
+    {
+      "session_id": "80",
+      "time_control_category": "bullet",
+      "n_games_total": 6,
+      "n_games_used": 1,
+      "rating_after_last_game": 1980.2678326354876
+    },
+    {
+      "session_id": "81",
+      "time_control_category": "bullet",
+      "n_games_total": 28,
+      "n_games_used": 19,
+      "rating_after_last_game": 1999.9842287762833
+    },
+    {
+      "session_id": "82",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "83",
+      "time_control_category": "bullet",
+      "n_games_total": 3,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "84",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "85",
+      "time_control_category": "bullet",
+      "n_games_total": 27,
+      "n_games_used": 4,
+      "rating_after_last_game": 2037.3450964189515
+    },
+    {
+      "session_id": "86",
+      "time_control_category": "bullet",
+      "n_games_total": 38,
+      "n_games_used": 1,
+      "rating_after_last_game": 2045.087127147825
+    },
+    {
+      "session_id": "87",
+      "time_control_category": "bullet",
+      "n_games_total": 12,
+      "n_games_used": 2,
+      "rating_after_last_game": 2060.787160996907
+    },
+    {
+      "session_id": "88",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "89",
+      "time_control_category": "bullet",
+      "n_games_total": 5,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "90",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "91",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "92",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "93",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "94",
+      "time_control_category": "blitz",
+      "n_games_total": 9,
+      "n_games_used": 7,
+      "rating_after_last_game": 2018.0869237239297
+    },
+    {
+      "session_id": "95",
+      "time_control_category": "other",
+      "n_games_total": 4,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "96",
+      "time_control_category": "bullet",
+      "n_games_total": 24,
+      "n_games_used": 21,
+      "rating_after_last_game": 1818.5777480680597
+    },
+    {
+      "session_id": "97",
+      "time_control_category": "other",
+      "n_games_total": 7,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "98",
+      "time_control_category": "bullet",
+      "n_games_total": 9,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "99",
+      "time_control_category": "blitz",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "100",
+      "time_control_category": "bullet",
+      "n_games_total": 5,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "101",
+      "time_control_category": "bullet",
+      "n_games_total": 5,
+      "n_games_used": 2,
+      "rating_after_last_game": 1819.3375925193236
+    },
+    {
+      "session_id": "102",
+      "time_control_category": "other",
+      "n_games_total": 8,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "103",
+      "time_control_category": "other",
+      "n_games_total": 1,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    },
+    {
+      "session_id": "104",
+      "time_control_category": "bullet",
+      "n_games_total": 12,
+      "n_games_used": 4,
+      "rating_after_last_game": 1843.9477278567522
+    },
+    {
+      "session_id": "105",
+      "time_control_category": "bullet",
+      "n_games_total": 35,
+      "n_games_used": 32,
+      "rating_after_last_game": 1935.683328465599
+    },
+    {
+      "session_id": "106",
+      "time_control_category": "other",
+      "n_games_total": 2,
+      "n_games_used": 0,
+      "rating_after_last_game": null
+    }
+  ]
+}
