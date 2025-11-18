@@ -80,20 +80,9 @@ def train_val_test_split_by_session(df: pd.DataFrame, random_state: int = 42):
 
 
 def prepare_raw_feature_matrix(df: pd.DataFrame):
-    """
-    Select numeric "raw" features (no tilt columns) for the model.
-
-    We use:
-      - game_in_session, session_len, phase
-      - result_score, pl, rolling_result_w5
-      - rating_diff, my_rating, opp_rating
-      - time_of_day, day_of_week
-      - rated (as int)
-    """
     df_feats = df.copy()
 
     if "rolling_result_w5" not in df_feats.columns:
-        # ensure it exists; fallback rolling if needed
         df_feats = df_feats.sort_values(["session_id", "game_in_session"])
         df_feats["rolling_result_w5"] = (
             df_feats.groupby("session_id")["result_score"]
@@ -102,12 +91,12 @@ def prepare_raw_feature_matrix(df: pd.DataFrame):
             .reset_index(level=0, drop=True)
         )
 
-    # cast 'rated' to int if present
     if "rated" in df_feats.columns:
         df_feats["rated_int"] = df_feats["rated"].astype(int)
     else:
         df_feats["rated_int"] = 0
 
+    # Base features (what you had before)
     feature_cols = [
         "game_in_session",
         "session_len",
@@ -123,13 +112,35 @@ def prepare_raw_feature_matrix(df: pd.DataFrame):
         "rated_int",
     ]
 
-    # Ensure all feature cols exist
+    # Optional: new engine/time features
+    extra_cols = [
+        "my_blunder_count",
+        "my_mistake_count",
+        "my_inaccuracy_count",
+        "my_acpl",
+        "opp_blunder_count",
+        "opp_mistake_count",
+        "opp_inaccuracy_count",
+        "opp_acpl",
+        "avg_secs_per_move_overall",
+        "my_avg_secs_per_move",
+        "my_first_move_secs",
+        "my_max_secs_per_move",
+        "engine_eval_mean_cp",
+        "engine_eval_max_abs_swing_cp",
+    ]
+
+    # Only add extras that actually exist (in case you re-use this on older files)
+    extra_cols_present = [c for c in extra_cols if c in df_feats.columns]
+    feature_cols = feature_cols + extra_cols_present
+
     missing = [c for c in feature_cols if c not in df_feats.columns]
     if missing:
         raise ValueError(f"Missing raw feature columns: {missing}")
 
     X = df_feats[feature_cols].astype(float).values
     return X, feature_cols
+
 
 
 def compute_class_weights(y: np.ndarray):
@@ -198,9 +209,9 @@ def main():
     print("Training HistGradientBoostingClassifier on raw features...")
     clf = HistGradientBoostingClassifier(
         loss="log_loss",
-        max_depth=3,
+        max_depth=7,
         learning_rate=0.05,
-        max_iter=400,
+        max_iter=100,
         random_state=RANDOM_STATE,
     )
 

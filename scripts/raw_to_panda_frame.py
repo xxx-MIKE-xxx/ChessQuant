@@ -33,8 +33,10 @@ import pandas as pd
 # Paths / constants
 # -----------------------------------------------------------------------------
 
-RAW_DATA_DIR = Path("raw_data")
-OUTPUT_DIR = Path("output_dataset")
+RAW_DATA_DIR = Path("data") / "raw_data"
+
+# Formatted outputs are under data/formatted_data
+OUTPUT_DIR = Path("data") / "formatted_data"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 GAMES_JSON_FULL = RAW_DATA_DIR / "julio_amigo_dos_games_full.json"
@@ -65,7 +67,10 @@ EXPECTED_GAME_KEYS = {
     "analysis",
     "clock",
     "timeControl",
+    "tournament",  
+    "initialFen",
 }
+
 
 
 # -----------------------------------------------------------------------------
@@ -400,29 +405,46 @@ def load_rating_history_df() -> pd.DataFrame:
       "name": "Blitz",
       "points": [[year, month, day, rating], ...]
     }
+
+    Some entries can contain invalid calendar dates (e.g. 2025-09-31).
+    We skip those points instead of failing the whole ETL.
     """
     raw = _load_json(RATING_HISTORY_JSON)
     rows: List[Dict[str, Any]] = []
+    skipped = 0
+
     for block in raw:
         perf_name = block.get("name")
         for y, m, d, rating in block.get("points", []):
+            try:
+                ts = pd.Timestamp(
+                    year=int(y),
+                    month=int(m),
+                    day=int(d),
+                    tz="UTC",
+                ).normalize()
+            except Exception:
+                # Bad date (e.g., 2025-09-31). Just skip this point.
+                skipped += 1
+                continue
+
             rows.append(
                 {
                     "perf_name": perf_name,
-                    "date": pd.Timestamp(
-                        year=int(y),
-                        month=int(m),
-                        day=int(d),
-                        tz="UTC",
-                    ).normalize(),
+                    "date": ts,
                     "rating": rating,
                 }
             )
+
+    if skipped > 0:
+        print(f"Skipped {skipped} rating history points with invalid dates")
+
     df = pd.DataFrame(rows)
     if not df.empty:
         df.sort_values(["perf_name", "date"], inplace=True)
         df.reset_index(drop=True, inplace=True)
     return df
+
 
 
 # -----------------------------------------------------------------------------
@@ -453,7 +475,8 @@ def load_games_df() -> pd.DataFrame:
         source = g.get("source")
         status = g.get("status")
         winner = g.get("winner")
-
+        tournament = g.get("tournament")  # may be None for non-tournament games
+        initial_fen = g.get("initialFen")
         created_ms = g.get("createdAt")
         last_ms = g.get("lastMoveAt")
 
@@ -574,7 +597,8 @@ def load_games_df() -> pd.DataFrame:
             "user_id": my_username,
             "platform": PLATFORM,
             "game_id": game_id,
-
+            "tournament_id": tournament,
+            "initial_fen": initial_fen,
             # Basic meta
             "rated": rated,
             "variant": variant,
@@ -690,9 +714,15 @@ def assign_sessions(df: pd.DataFrame, gap_minutes: int = SESSION_GAP_MINUTES) ->
     """
     Assign a session_id such that if the gap between consecutive games is > gap_minutes,
     we start a new session.
+
+    Also adds:
+      - game_in_session: 1..N index within each session
+      - session_len:     total games in that session
     """
     if df.empty:
         df["session_id"] = []
+        df["game_in_session"] = []
+        df["session_len"] = []
         return df
 
     df = df.sort_values("created_at").reset_index(drop=True)
@@ -717,7 +747,15 @@ def assign_sessions(df: pd.DataFrame, gap_minutes: int = SESSION_GAP_MINUTES) ->
         prev_time = ts
 
     df["session_id"] = session_ids
+
+    # 1..N within each session
+    df["game_in_session"] = df.groupby("session_id").cumcount() + 1
+
+    # session length (games) per session
+    df["session_len"] = df.groupby("session_id")["game_id"].transform("size")
+
     return df
+
 
 
 def add_time_features(df: pd.DataFrame) -> pd.DataFrame:
@@ -728,7 +766,32 @@ def add_time_features(df: pd.DataFrame) -> pd.DataFrame:
     df["day_of_week"] = df["created_at"].dt.dayofweek
     df["is_weekend"] = df["day_of_week"].isin({5, 6})
     df["hour_of_day"] = df["created_at"].dt.hour
+
+    # Numeric time-of-day in hours (e.g. 13.5 = 13:30)
+    df["time_of_day"] = df["created_at"].dt.hour + df["created_at"].dt.minute / 60.0
+
     return df
+
+
+def add_phase_feature(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Simple phase within session:
+      0 = early, 1 = middle, 2 = late
+    """
+    if df.empty or "game_in_session" not in df.columns or "session_len" not in df.columns:
+        df["phase"] = 1  # default mid if we can't compute
+        return df
+
+    # position in session [0,1)
+    frac = (df["game_in_session"] - 1) / df["session_len"].clip(lower=1)
+
+    phase = pd.Series(1, index=df.index)  # default mid
+    phase[frac < 1/3] = 0
+    phase[frac >= 2/3] = 2
+
+    df["phase"] = phase.astype(int)
+    return df
+
 
 
 def add_rating_bins(df: pd.DataFrame, bin_size: int = 100) -> pd.DataFrame:
@@ -766,6 +829,7 @@ def main() -> None:
     # Derived features that we know we use downstream
     df_games = assign_sessions(df_games)
     df_games = add_time_features(df_games)
+    df_games = add_phase_feature(df_games)
     df_games = add_rating_bins(df_games)
     df_games = add_rolling_features(df_games)
 
