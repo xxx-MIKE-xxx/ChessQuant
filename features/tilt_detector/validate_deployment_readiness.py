@@ -1,72 +1,89 @@
+# File: features/tilt_detector/validate_deployment_readiness.py
 import sys
 import json
+import pandas as pd
+import numpy as np
 from pathlib import Path
-from tilt_model_sdk import TiltModel
 
-# --- AUTO-LOCATE DATA ---
-def find_data():
-    search_names = ["games_enriched_full.csv", "julio_amigo_dos_games_full.json"]
-    # Search up to 3 parent directories
-    base = Path.cwd()
-    search_paths = [base] + [base.parents[i] for i in range(3)]
-    
-    for p in search_paths:
-        # Check raw/formatted/root folders
-        subdirs = [p, p / "data" / "formatted_data", p / "data" / "raw_data", p / "output_dataset"]
-        for d in subdirs:
-            if not d.exists(): continue
-            for name in search_names:
-                if (d / name).exists():
-                    return (d / name), ('csv' if 'csv' in name else 'json')
-    return None, None
+# Add project root to path
+BASE_DIR = Path(__file__).resolve().parents[2]
+sys.path.append(str(BASE_DIR))
+
+from features.tilt_detector.train_model_sdk import TiltModel
+
+# --- CONFIG ---
+DATA_PATH = BASE_DIR / "data/train_ready_data/games_dataset_model.csv"
+MODEL_PATH = BASE_DIR / "assets/tilt_model.json"
+CONFIG_PATH = BASE_DIR / "assets/tilt_config.joblib"
 
 def run_verification():
-    print("--- 1. Locating Data ---")
-    data_path, file_type = find_data()
-    
-    if not data_path:
-        print("[ERROR] Could not find 'games_enriched_full.csv' or JSON file.")
-        print("Please verify the file exists in 'data/formatted_data/'.")
+    print("🛡️  STARTING DEPLOYMENT VERIFICATION")
+    print("=====================================")
+
+    # 1. CHECK DATA AVAILABILITY
+    print("\n[1] Verifying Data...")
+    if not DATA_PATH.exists():
+        print(f"   ❌ ERROR: Training data not found at {DATA_PATH}")
+        print("   Run 'scripts/prepare_training_data.py' first.")
+        return
+    print(f"   ✅ Found training data: {DATA_PATH.name}")
+
+    # 2. TEST TRAINING (FAST MODE)
+    print("\n[2] Testing Training Pipeline...")
+    try:
+        # Initialize SDK
+        sdk = TiltModel()
+        # Run training (this saves the model too)
+        sdk.train_from_file(str(DATA_PATH), str(MODEL_PATH))
+        print("   ✅ Training completed successfully.")
+    except Exception as e:
+        print(f"   ❌ Training Failed: {e}")
         return
 
-    print(f"Found {file_type.upper()} at: {data_path}")
+    # 3. TEST PERSISTENCE (Load from disk)
+    print("\n[3] Testing Model Loading...")
+    try:
+        sdk_live = TiltModel()
+        sdk_live.load(str(MODEL_PATH))
+        print(f"   ✅ Model loaded. Threshold: {sdk_live.config.get('threshold', 'N/A')}")
+    except Exception as e:
+        print(f"   ❌ Loading Failed: {e}")
+        return
+
+    # 4. TEST INFERENCE (With Correct Flat Format)
+    print("\n[4] Testing Inference (Mock Session)...")
     
-    # Initialize
-    sdk = TiltModel(user_id="julio_amigo_dos")
+    # Create a fake "Tilt Session"
+    # Note: We send FLAT fields as expected by _enrich_json
+    base_time = 1760000000000
+    fake_session = []
     
-    # TRAIN
-    print("\n--- 2. Testing Training ---")
-    if file_type == 'json':
-        with open(data_path, 'r') as f:
-            data = json.load(f)
-        sdk.train(data, source_type='json')
-    else:
-        sdk.train(str(data_path), source_type='csv')
-        
-    # INFERENCE SIMULATION
-    print("\n--- 3. Testing Live Inference (Hot Path) ---")
-    # We construct a fake "Last 20 Games" payload to simulate Vercel input
-    fake_games = []
-    # Create dummy JSON-like structure
-    base_time = 1700000000000
-    for i in range(20):
-        fake_games.append({
-            "createdAt": base_time + (i * 600000), # 10 mins apart
-            "players": {
-                "white": {"user": {"name": "julio_amigo_dos"}, "analysis": {"acpl": 10 + i*5}}, # Getting worse
-                "black": {"user": {"name": "opponent"}}
-            },
-            "moves": "[%clk 0:00:30] " * 40, # Constant speed
-            "winner": "black" # Losing
+    for i in range(5):
+        fake_session.append({
+            "id": f"test_game_{i}",
+            "createdAt": base_time + (i * 300000), # 5 min gaps
+            "lastMoveAt": base_time + (i * 300000) + 60000,
+            "my_acpl": 100 + (i * 20),      # Degrading performance
+            "my_blunder_count": i,          # Increasing blunders
+            "my_avg_secs_per_move": 2.0,    # Playing fast
+            "result": 0.0,                  # Losing
+            "rating_diff": -10
         })
-    
-    result = sdk.predict(fake_games)
-    print("Result Payload:")
-    print(json.dumps(result, indent=2))
-    
-    if result['stop_probability'] > 0:
-        print("\n[SUCCESS] Pipeline Ready for Deployment.")
-        print("Next Step: Copy 'tilt_model_sdk.py' to your Vercel API folder.")
+
+    try:
+        result = sdk_live.predict(fake_session)
+        print("\n   📊 Inference Result:")
+        print(json.dumps(result, indent=3))
+        
+        if result['should_stop']:
+            print("   ✅ Logic Check: Model correctly identified tilt behavior.")
+        else:
+            print("   ⚠️ Logic Check: Model was lenient (predicted safe). Check threshold.")
+            
+    except Exception as e:
+        print(f"   ❌ Inference Failed: {e}")
+        import traceback
+        traceback.print_exc()
 
 if __name__ == "__main__":
     run_verification()

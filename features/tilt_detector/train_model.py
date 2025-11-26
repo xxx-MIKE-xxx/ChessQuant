@@ -42,7 +42,7 @@ def run_pipeline():
     OUTPUT_ANALYSIS_DIR.mkdir(parents=True, exist_ok=True)
     
     if not DATA_FILE.exists():
-        print(f"❌ Error: Data file not found at {DATA_FILE}")
+        print(f" Error: Data file not found at {DATA_FILE}")
         return
 
     # ---------------------------------------------------------
@@ -89,7 +89,7 @@ def run_pipeline():
     
     # Save Initial Model
     final_model.save_model(MODEL_FILE)
-    print(f"✅ Model saved to {MODEL_FILE}")
+    print(f" Model saved to {MODEL_FILE}")
 
     # ---------------------------------------------------------
     # PHASE 2: THRESHOLD OPTIMIZATION
@@ -148,7 +148,7 @@ def run_pipeline():
     best_pl = float(best_row['pl'])
     improvement = best_pl - baseline_pl
     
-    print(f"🏆 Optimal Threshold: {best_thresh:.2f}")
+    print(f" Optimal Threshold: {best_thresh:.2f}")
     print(f"   Baseline P/L: {baseline_pl:.0f}")
     print(f"   Simulated P/L: {best_pl:.0f}")
     print(f"   Net Gain: {improvement:+.0f}")
@@ -193,8 +193,8 @@ def run_pipeline():
     with open(SUMMARY_FILE, 'w') as f:
         f.write(summary)
         
-    print(f"✅ Config saved: {CONFIG_FILE}")
-    print(f"✅ Summary saved: {SUMMARY_FILE}")
+    print(f" Config saved: {CONFIG_FILE}")
+    print(f"Summary saved: {SUMMARY_FILE}")
     print("Pipeline Complete.")
 
 if __name__ == "__main__":

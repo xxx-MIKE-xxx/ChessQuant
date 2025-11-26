@@ -70,36 +70,14 @@ class TiltModel:
         # We need to extract fields similar to 'pd.json_normalize' but safely
         rows = []
         for g in games_list:
-            # Determine Hero (User) Color - assumes user is identifying the session
-            # For inference, we often assume the user providing the history IS the hero.
-            # But we need to parse the complex JSON structure if it comes raw from Lichess.
-            
-            # Simplified extraction for inference speed:
-            # We expect the input to be slightly pre-parsed OR raw Lichess structure.
-            # Let's handle Raw Lichess structure (players.white.analysis...)
-            
-            # Heuristic: Identify 'me' by looking for the user who played ALL games? 
-            # Or pass user_id. For now, assume we extract basic stats.
-            
-            # NOTE: In production app, you likely pass cleaned stats. 
-            # Here we implement robust extraction assuming standard Lichess fields.
-            
             # Extract timestamps
             created_at = pd.to_datetime(g.get('createdAt'), unit='ms', utc=True)
             last_move = pd.to_datetime(g.get('lastMoveAt'), unit='ms', utc=True)
             
             # P/L
-            # Try to find 'ratingDiff' in players
-            # We can't easily know which player is 'me' without user_id. 
-            # We assume the API caller filtered for 'me' or provided 'rating_diff'
             rating_diff = g.get('rating_diff', 0) # Expect pre-calculated or flat
             
             # Stats
-            # Expect keys: my_acpl, my_blunder_count, my_avg_secs_per_move, result
-            # If they don't exist (Raw JSON), we'd need the parser logic.
-            # To keep this SDK lightweight, we assume the Input List has these keys.
-            # (Your Next.js backend should parse the Lichess JSON into these metrics)
-            
             row = {
                 'created_at': created_at,
                 'last_move_at': last_move,
@@ -284,7 +262,34 @@ class TiltModel:
         }
 
     # ------------------------------------------------------------------
-    # 4. PERSISTENCE
+    # 4. EXPLAINABILITY API (NEW)
+    # ------------------------------------------------------------------
+    def explain_feature_importance(self, top_n=10):
+        """
+        Returns the top N most important features based on 'weight'.
+        Only works if the model is trained/loaded.
+        """
+        if self.model is None:
+            print("❌ Model not loaded. Cannot explain importance.")
+            return {}
+
+        # Get booster importance
+        importance_dict = self.model.get_booster().get_score(importance_type='weight')
+        
+        # Sort by importance (descending)
+        sorted_importance = sorted(importance_dict.items(), key=lambda item: item[1], reverse=True)
+        
+        # Take top N
+        top_features = dict(sorted_importance[:top_n])
+        
+        print(f"\n--- Top {top_n} Feature Importance (Weight) ---")
+        for feat, score in top_features.items():
+            print(f"{feat:<25}: {score}")
+            
+        return top_features
+
+    # ------------------------------------------------------------------
+    # 5. PERSISTENCE
     # ------------------------------------------------------------------
     def save(self, model_path):
         model_path = Path(model_path)
@@ -312,3 +317,4 @@ if __name__ == "__main__":
     # Run pipeline when executed as script
     model = TiltModel()
     model.train_from_file()
+    model.explain_feature_importance()
